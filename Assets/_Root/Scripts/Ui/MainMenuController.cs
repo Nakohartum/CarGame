@@ -1,9 +1,10 @@
 using Profile;
 using Tool;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using Object = UnityEngine.Object;
 
-namespace Ui
+namespace Game.UI
 {
     internal class MainMenuController : BaseController
     {
@@ -16,7 +17,24 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, OpenSettings);
+            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, Buy);
+            _profilePlayer.Gold.Value.SubscribeOnChange(_view.ChangeText);
+        }
+
+        private void Buy(Product product)
+        {
+            _profilePlayer.Gold.Value.Value += 100;
+        }
+
+
+        private void ShowIntersitial()
+        {
+            _profilePlayer.UnityAdsService.InterstitionalPlayer.Play();
+        }
+
+        private void ShowRewarded()
+        {
+            _profilePlayer.UnityAdsService.RewardedPlayer.Play();
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -33,5 +51,13 @@ namespace Ui
 
         private void OpenSettings() =>
             _profilePlayer.CurrentState.Value = GameState.Settings;
+
+        protected override void OnDispose()
+        {
+            base.OnDispose();
+            _profilePlayer.Gold.Value.UnSubscribeOnChange(_view.ChangeText);
+        }
     }
+    
+    
 }

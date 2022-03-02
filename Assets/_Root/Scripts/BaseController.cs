@@ -13,6 +13,7 @@ internal abstract class BaseController : IDisposable
 
     public void Dispose()
     {
+        OnDispose();
         if (_isDisposed)
             return;
 
@@ -21,7 +22,7 @@ internal abstract class BaseController : IDisposable
         DisposeBaseControllers();
         DisposeGameObjects();
 
-        OnDispose();
+        
     }
 
     private void DisposeBaseControllers()

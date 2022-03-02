@@ -422,4 +422,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialState: 1
   TransportType: 0
+  _settings: {fileID: 11400000, guid: 4dad735195d485a46af9d5bd24f88f42, type: 2}
+  _productLibrary: {fileID: 11400000, guid: 497bf8cacdc60e348ba05d8081f652d2, type: 2}
   _placeForUi: {fileID: 1903552}

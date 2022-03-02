@@ -1,6 +1,5 @@
-using Ui;
 using Game;
-using Game.Settings;
+using Game.UI;
 using Profile;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ internal class MainController : BaseController
     {
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
-
+        _settingsController?.Dispose();
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 
@@ -43,6 +42,7 @@ internal class MainController : BaseController
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer);
+                _profilePlayer.Analytics.SendMessage("GameStart game");
                 _settingsController?.Dispose();
                 _mainMenuController?.Dispose();
                 break;
@@ -54,6 +54,7 @@ internal class MainController : BaseController
             default:
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();
+                _settingsController?.Dispose();
                 break;
         }
     }

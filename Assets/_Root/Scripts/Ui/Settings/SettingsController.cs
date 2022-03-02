@@ -2,7 +2,7 @@
 using Tool;
 using UnityEngine;
 
-namespace Game.Settings
+namespace Game.UI
 {
     internal class SettingsController : BaseController
     {

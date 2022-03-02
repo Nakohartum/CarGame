@@ -1,4 +1,5 @@
 using System;
+using Services;
 using Game;
 using Game.Boat;
 using Game.Car;
@@ -8,15 +9,23 @@ namespace Profile
 {
     internal class ProfilePlayer
     {
+        public IAPService IAPService;
         public readonly TransportType TransportType;
         public readonly SubscriptionProperty<GameState> CurrentState;
         public readonly PlayerModel PlayerModel;
-        
+        public IAnalytics Analytics;
+        public UnityAdsService UnityAdsService;
+        public Gold Gold;
 
-        public ProfilePlayer(float speedCar, GameState initialState, TransportType transportType) : this(speedCar)
+        public ProfilePlayer(float speedCar, GameState initialState, TransportType transportType, IAnalytics analytics,
+            UnityAdsService unityAdsService, IAPService iapService) : this(speedCar)
         {
             TransportType = transportType;
             CurrentState.Value = initialState;
+            Analytics = analytics;
+            UnityAdsService = unityAdsService;
+            IAPService = iapService;
+            Gold = new Gold();
         }
 
         public ProfilePlayer(float speedCar)
