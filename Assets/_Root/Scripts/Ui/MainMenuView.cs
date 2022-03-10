@@ -14,18 +14,20 @@ namespace Game.UI
         [SerializeField] private Button _buttonSettings;
         [SerializeField] private Button _buttonRewarded;
         [SerializeField] private Button _buttonInterstitial;
+        [SerializeField] private Button _buttonShed;
         [SerializeField] private IAPButton _buttonBuy;
         [SerializeField] public TMP_Text _text;
 
 
 
         public void Init(UnityAction startGame, UnityAction openSettings, UnityAction showRewarded, 
-            UnityAction showIntersitial, UnityAction<Product> Buy)
+            UnityAction showIntersitial, UnityAction openShed, UnityAction<Product> Buy)
         {
             _buttonStart.onClick.AddListener(startGame);
             _buttonSettings.onClick.AddListener(openSettings);
             _buttonInterstitial.onClick.AddListener(showIntersitial);
             _buttonRewarded.onClick.AddListener(showRewarded);
+            _buttonShed.onClick.AddListener(openShed);
             _buttonBuy.onPurchaseComplete.AddListener(Buy);
             _text.text = "Gold: ";
         }

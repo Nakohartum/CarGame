@@ -1,7 +1,9 @@
 ﻿namespace Shed
 {
-    public interface IUpgradable
+    internal interface IUpgradable
     {
-        
+        float Speed { get; set; }
+        float JumpPower { get; set; }
+        void Restore();
     }
 }

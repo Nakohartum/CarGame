@@ -1,7 +1,7 @@
-﻿namespace Game.Features.Shed.Upgrade
+﻿namespace Shed
 {
-    public interface IUpgradeHandler
+    internal interface IUpgradeHandler
     {
-        
+        void Upgrade(IUpgradable upgradable);
     }
 }

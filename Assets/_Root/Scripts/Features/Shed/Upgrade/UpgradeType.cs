@@ -1,7 +1,9 @@
 ﻿namespace Shed
 {
-    public enum UpgradeType
+    internal enum UpgradeType
     {
-        
+        None,
+        Speed,
+        Jump
     }
 }

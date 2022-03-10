@@ -6,7 +6,7 @@ namespace Game.InputLogic
 {
     internal class KeyBoardInputView : BaseInputView
     {
-        [Header("Settings")] [SerializeField] private float _speed;
+        
 
         private void Start()
         {
@@ -16,8 +16,13 @@ namespace Game.InputLogic
         private void Move()
         {
             var direction = Input.GetAxis("Horizontal") * _speed * Time.deltaTime;
+            var isJumping = Input.GetAxis("Vertical") * _jumpPower;
             float abs = Mathf.Abs(direction);
             float sign = Mathf.Sign(direction);
+            if (isJumping > 0.1f)
+            {
+                OnJumpMove(isJumping);
+            }
             if (sign > 0)
             {
                 OnRightMove(abs);

@@ -63,6 +63,7 @@ namespace Services
 
         public void Buy(string id)
         {
+            Debug.Log("Buy");
             if (IsInitialized)
             {
                 _storeController.InitiatePurchase(id);
@@ -75,6 +76,7 @@ namespace Services
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
+            Debug.Log("Process");
             if (_validator.Validate(purchaseEvent))
             {
                 PurchaseSucceed?.Invoke();

@@ -1,8 +1,9 @@
 using Profile;
+using Services;
 using Tool;
 using UnityEngine;
-using UnityEngine.Purchasing;
 using Object = UnityEngine.Object;
+using Product = UnityEngine.Purchasing.Product;
 
 namespace Game.UI
 {
@@ -17,8 +18,13 @@ namespace Game.UI
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, Buy);
+            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, OpenShed,Buy);
             _profilePlayer.Gold.Value.SubscribeOnChange(_view.ChangeText);
+        }
+
+        private void OpenShed()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Shed;
         }
 
         private void Buy(Product product)
@@ -29,12 +35,12 @@ namespace Game.UI
 
         private void ShowIntersitial()
         {
-            _profilePlayer.UnityAdsService.InterstitionalPlayer.Play();
+            UnityAdsService.Instance(_profilePlayer.Settings).InterstitionalPlayer.Play();
         }
 
         private void ShowRewarded()
         {
-            _profilePlayer.UnityAdsService.RewardedPlayer.Play();
+            UnityAdsService.Instance(_profilePlayer.Settings).RewardedPlayer.Play();
         }
 
         private MainMenuView LoadView(Transform placeForUi)

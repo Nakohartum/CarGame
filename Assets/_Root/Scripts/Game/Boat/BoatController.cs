@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Game.Boat
 {
-    internal class BoatController : BaseController
+    internal class BoatController : TransportController
     {
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Boat");
         private readonly BoatView _view;
 
-        public GameObject ViewGameObject => _view.gameObject;
+        public override GameObject ViewGameObject => _view.gameObject;
 
         public BoatController()
         {

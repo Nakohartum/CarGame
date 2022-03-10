@@ -1,15 +1,10 @@
-using Services;
-using Game;
+using Game.Factory;
 using Profile;
 using UnityEngine;
 
 internal class EntryPoint : MonoBehaviour
 {
-    private const float SpeedCar = 15f;
-    [SerializeField]private GameState InitialState;
-    [SerializeField] private TransportType TransportType;
-    [SerializeField] private Settings _settings;
-    [SerializeField] private ProductLibrary _productLibrary;
+    [SerializeField] private GameData _gameData;
     [SerializeField] private Transform _placeForUi;
 
     private MainController _mainController;
@@ -17,11 +12,11 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        var analytics = UnityAnalytics.Instance();
-        var unityAdsService = UnityAdsService.Instance(_settings);
-        var iapService = IAPService.Instance(_productLibrary);
-        var profilePlayer = new ProfilePlayer(SpeedCar, InitialState, TransportType, analytics, unityAdsService, iapService);
-        _mainController = new MainController(_placeForUi, profilePlayer);
+        var profilePlayer = new ProfilePlayer(_gameData.SpeedCar, _gameData.JumpPower, _gameData.InitialState, 
+            _gameData.TransportType, _gameData.Settings, _gameData.ProductLibrary);
+        var inventoryFactory = new InventoryFactory(_placeForUi, profilePlayer);
+        var shedFactory = new ShedFactory(_placeForUi, profilePlayer, inventoryFactory);
+        _mainController = new MainController(_placeForUi, profilePlayer, shedFactory);
     }
 
     private void OnDestroy()

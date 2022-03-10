@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb26e9195c684b3b995e808e556c370c, type: 3}
+  m_Name: Transmition
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: transmition
+  <Title>k__BackingField: Transmition
+  <Icon>k__BackingField: {fileID: -5410399771654756384, guid: 07fa4a9616a73f34785703310e3f094b, type: 3}
