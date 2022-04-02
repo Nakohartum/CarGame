@@ -30,8 +30,6 @@
                 case DataType.Power:
                     _powerPlayer = dataPlayer.Value;
                     break;
-                case DataType.Crime:
-                    break;
             }
         }
 

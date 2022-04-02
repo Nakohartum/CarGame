@@ -20,7 +20,6 @@ namespace _Battle
     [Header("Enemy Stats")] 
     [SerializeField] private TMP_Text _countPowerEnemyText;
     [SerializeField] private int _minCrime;
-    [SerializeField] private int _maxCrime;
 
     [Header("Money Buttons")] 
     [SerializeField] private Button _addMoneyButton;
@@ -135,20 +134,17 @@ namespace _Battle
 
     private void DecreaseCrime()
     {
+        if (_allCountCrimePlayer == 0)
+        {
+            return;
+        }
         DecreaseValue(ref _allCountCrimePlayer, DataType.Crime);
         CheckLeaveStatus(_allCountCrimePlayer);
     }
 
     private void CheckLeaveStatus(int value)
     {
-        if (value > _minCrime)
-        {
-            _leaveButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            _leaveButton.gameObject.SetActive(true);
-        }
+        _leaveButton.gameObject.SetActive(value <= _minCrime);
     }
     
     private void IncreaseValue(ref int value, DataType type)
@@ -227,7 +223,7 @@ namespace _Battle
         string color = isVictory ? "#07FF00" : "#FF0000";
         string message = isVictory ? "Win" : "Lose";
         
-        Debug.Log($"<color = {color}> {message}!!! </color>");
+        Debug.Log($"<color={color}> {message}!!! </color>");
     }
 }
 }
