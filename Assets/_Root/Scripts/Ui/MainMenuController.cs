@@ -1,6 +1,7 @@
 using Profile;
 using Services;
 using Tool;
+using Ui.Settings;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Product = UnityEngine.Purchasing.Product;
@@ -12,14 +13,21 @@ namespace Game.UI
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/mainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
+        
 
 
         public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, OpenShed,Buy);
+            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, OpenShed,Buy, OpenRewards);
             _profilePlayer.Gold.Value.SubscribeOnChange(_view.ChangeText);
+            
+        }
+
+        private void OpenRewards()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Reward;
         }
 
         private void OpenShed()

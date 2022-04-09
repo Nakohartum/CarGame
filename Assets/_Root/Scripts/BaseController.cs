@@ -14,9 +14,9 @@ internal abstract class BaseController : IDisposable
 
     public void Dispose()
     {
-        OnDispose();
         if (_isDisposed)
             return;
+        OnDispose();
 
         _isDisposed = true;
 

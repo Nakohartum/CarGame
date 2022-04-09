@@ -1,3 +1,4 @@
+using System;
 using Tool;
 using UnityEngine;
 
@@ -17,14 +18,14 @@ namespace Game.InputLogic
             SubscriptionProperty<float> leftMove,
             SubscriptionProperty<float> rightMove,
             SubscriptionProperty<float> jumpMove,
-            float speed, float jumpPower, TransportController transportController)
+            float speed, float jumpPower, TransportController transportController, ContactPoller contactPoller)
         {
             _leftMove = leftMove;
             _rightMove = rightMove;
             _jumpMove = jumpMove;
             _speed = speed;
             _jumpPower = jumpPower;
-            _contactPoller = new ContactPoller(transportController);
+            _contactPoller = contactPoller;
             _rigidbody = transportController.ViewGameObject.GetComponent<Rigidbody2D>();
         }
 
@@ -46,6 +47,11 @@ namespace Game.InputLogic
                 _jumpMove.Value = value;
                 _rigidbody.AddForce(Vector2.up * _jumpMove.Value, ForceMode2D.Impulse);
             }
+        }
+
+        private void OnDestroy()
+        {
+            _contactPoller.Dispose();
         }
     }
 }

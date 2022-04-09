@@ -7,6 +7,7 @@ using Game.InputLogic;
 using Game.TapeBackground;
 using Profile;
 using Tool;
+using Ui.Settings;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,6 +23,7 @@ namespace Game
         private readonly TapeBackgroundController _tapeBackgroundController;
         private readonly InputGameController _inputGameController;
         private readonly IAbilitiesController _abilitiesController;
+        private readonly PauseMenuController _pauseMenuController;
         public GameController(ProfilePlayer profilePlayer, Transform placeForUI)
         {
             _profilePlayer = profilePlayer;
@@ -36,6 +38,8 @@ namespace Game
             AddController(_inputGameController);
             _abilitiesController = abilitiesFactory.Create();
             AddController((AbilitiesController)_abilitiesController);
+            _pauseMenuController = new PauseMenuController(_profilePlayer, placeForUI);
+            AddController(_pauseMenuController);
         }
         private TransportController CreatePlayerController(ProfilePlayer profilePlayer)
         {

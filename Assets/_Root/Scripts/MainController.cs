@@ -1,3 +1,6 @@
+using _Rewards.Scripts;
+using Ui.Settings;
+using Features.Fight;
 using Game;
 using Game.Factory;
 using Game.UI;
@@ -16,7 +19,9 @@ internal class MainController : BaseController
     private GameController _gameController;
     private SettingsController _settingsController;
     private ShedFactory _shedFactory;
-
+    private FightController _fightController;
+    private RewardController _rewardController;
+    private StartFightController _startFightController;
 
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer, ShedFactory shedFactory)
     {
@@ -29,10 +34,7 @@ internal class MainController : BaseController
 
     protected override void OnDispose()
     {
-        _shedController?.Dispose();
-        _mainMenuController?.Dispose();
-        _gameController?.Dispose();
-        _settingsController?.Dispose();
+        DisposeAllControllers();
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 
@@ -47,6 +49,7 @@ internal class MainController : BaseController
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer, _placeForUi);
+                _startFightController = new StartFightController(_profilePlayer, _placeForUi);
                 UnityAnalytics.Instance().SendMessage("GameStart game");
                 break;
             case GameState.Settings:
@@ -55,6 +58,12 @@ internal class MainController : BaseController
             case GameState.Shed:
                 _shedController = _shedFactory.Create();
                 AddController(_shedController);
+                break;
+            case GameState.Fight:
+                _fightController = new FightController(_profilePlayer, _placeForUi);
+                break;
+            case GameState.Reward:
+                _rewardController = new RewardController(_placeForUi, _profilePlayer);
                 break;
             default:
                 DisposeAllControllers();
@@ -68,6 +77,10 @@ internal class MainController : BaseController
         _shedController?.Dispose();
         _gameController?.Dispose();
         _settingsController?.Dispose();
+        _shedController?.Dispose();
+        _fightController?.Dispose();
+        _startFightController?.Dispose();
+        _rewardController?.Dispose();
     }
 
    
