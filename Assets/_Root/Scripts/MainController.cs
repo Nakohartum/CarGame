@@ -5,9 +5,11 @@ using Game;
 using Game.Factory;
 using Game.UI;
 using Profile;
+using PushNotification.Settings;
 using Services;
 using Shed;
 using Tool;
+using Tool.PushNotification;
 using UnityEngine;
 
 internal class MainController : BaseController
@@ -22,9 +24,14 @@ internal class MainController : BaseController
     private FightController _fightController;
     private RewardController _rewardController;
     private StartFightController _startFightController;
+    private readonly INotificationScheduler _scheduler;
+    private readonly NotificationSettings _notificationSettings;
 
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, ShedFactory shedFactory)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, ShedFactory shedFactory, 
+        INotificationScheduler scheduler, NotificationSettings notificationSettings)
     {
+        _scheduler = scheduler;
+        _notificationSettings = notificationSettings;
         _placeForUi = placeForUi;
         _profilePlayer = profilePlayer;
         _shedFactory = shedFactory;
@@ -45,7 +52,8 @@ internal class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _scheduler,
+                    _notificationSettings.Notifications[0]);
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer, _placeForUi);

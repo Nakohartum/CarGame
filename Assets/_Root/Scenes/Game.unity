@@ -422,3 +422,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameData: {fileID: 11400000, guid: 517d7f8c8cbaf8b43825f9415372b855, type: 2}
   _placeForUi: {fileID: 1903552}
+  _notificationSettings: {fileID: 11400000, guid: 89be1372ee6a3554587abb7a0f9cd064, type: 2}

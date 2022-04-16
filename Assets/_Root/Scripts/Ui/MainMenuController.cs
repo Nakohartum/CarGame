@@ -1,6 +1,8 @@
 using Profile;
+using PushNotification.Settings;
 using Services;
 using Tool;
+using Tool.PushNotification;
 using Ui.Settings;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -13,16 +15,25 @@ namespace Game.UI
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/mainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
-        
+        private readonly INotificationScheduler _scheduler;
+        private NotificationData _notificationData;
 
 
-        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
+        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, 
+            INotificationScheduler scheduler, NotificationData notificationData)
         {
             _profilePlayer = profilePlayer;
+            _scheduler = scheduler;
+            _notificationData = notificationData;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, OpenShed,Buy, OpenRewards);
+            _view.Init(StartGame, OpenSettings, ShowRewarded, ShowIntersitial, OpenShed,Buy, OpenRewards, SendNotification);
             _profilePlayer.Gold.Value.SubscribeOnChange(_view.ChangeText);
             
+        }
+
+        private void SendNotification()
+        {
+            _scheduler.ScheduleNotification(_notificationData);
         }
 
         private void OpenRewards()

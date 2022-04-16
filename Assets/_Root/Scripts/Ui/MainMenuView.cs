@@ -17,13 +17,14 @@ namespace Game.UI
         [SerializeField] private Button _buttonInterstitial;
         [SerializeField] private Button _buttonShed;
         [SerializeField] private Button _buttonReward;
+        [SerializeField] private Button _buttonSendNotification;
         [SerializeField] private IAPButton _buttonBuy;
         [SerializeField] public TMP_Text _text;
 
 
 
         public void Init(UnityAction startGame, UnityAction openSettings, UnityAction showRewarded, 
-            UnityAction showIntersitial, UnityAction openShed, UnityAction<Product> Buy, UnityAction reward)
+            UnityAction showIntersitial, UnityAction openShed, UnityAction<Product> Buy, UnityAction reward, UnityAction sendNotification)
         {
             _buttonStart.onClick.AddListener(startGame);
             _buttonSettings.onClick.AddListener(openSettings);
@@ -31,6 +32,7 @@ namespace Game.UI
             _buttonRewardedAd.onClick.AddListener(showRewarded);
             _buttonShed.onClick.AddListener(openShed);
             _buttonReward.onClick.AddListener(reward);
+            _buttonSendNotification.onClick.AddListener(sendNotification);
             _buttonBuy.onPurchaseComplete.AddListener(Buy);
             _text.text = "Gold: ";
         }
@@ -48,6 +50,7 @@ namespace Game.UI
             _buttonInterstitial.onClick.RemoveAllListeners();
             _buttonBuy.onPurchaseComplete.RemoveAllListeners();
             _buttonReward.onClick.RemoveAllListeners();
+            _buttonSendNotification.onClick.RemoveAllListeners();
         }
     }
 }
