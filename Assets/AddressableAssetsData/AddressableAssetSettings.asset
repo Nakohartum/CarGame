@@ -21,6 +21,7 @@ MonoBehaviour:
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
   m_NonRecursiveBuilding: 0
+  m_CCDEnabled: 0
   m_maxConcurrentWebRequests: 500
   m_ContiguousBundles: 0
   m_StripUnityVersionFromBundleBuild: 0
@@ -34,12 +35,19 @@ MonoBehaviour:
   m_RemoteCatalogLoadPath:
     m_Id: 
   m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 2
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: 2c187f11a623e7e4899aef50038717a2, type: 2}
   - {fileID: 11400000, guid: 75f039f64d2d6a447b78985af788e020, type: 2}
   - {fileID: 11400000, guid: 457db3f037e79fc46a53cbd8a259e6d7, type: 2}
   - {fileID: 11400000, guid: fe0afc3e587e1e04ab1859ec2355cc92, type: 2}
+  - {fileID: 11400000, guid: 032bcead74b3fbf46b5c2e45791a111d, type: 2}
+  - {fileID: 11400000, guid: a52b30d8769a978409c0865847fac099, type: 2}
+  - {fileID: 11400000, guid: 2a1c8c84fe88d2f4ba965a1f16abeadb, type: 2}
+  - {fileID: 11400000, guid: 6aa0790e43d8c3a49944d8b785681c08, type: 2}
+  - {fileID: 11400000, guid: 87d63ad3cc3a89e4da58ca3d0230bfec, type: 2}
+  - {fileID: 11400000, guid: d80ee106041d27b4da52c002d4f60f11, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -81,6 +89,10 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Locale
+    - Locale-en
+    - Preload
+    - Locale-ru
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: c38cb7333237bfc41917df575f1b2de5, type: 2}

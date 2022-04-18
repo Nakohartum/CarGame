@@ -2,6 +2,7 @@ using Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Purchasing;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -18,9 +19,10 @@ namespace Game.UI
         [SerializeField] private Button _buttonShed;
         [SerializeField] private Button _buttonReward;
         [SerializeField] private Button _buttonSendNotification;
+        [SerializeField] private Button _buttonRu;
+        [SerializeField] private Button _buttonEn;
         [SerializeField] private IAPButton _buttonBuy;
         [SerializeField] public TMP_Text _text;
-
 
 
         public void Init(UnityAction startGame, UnityAction openSettings, UnityAction showRewarded, 
@@ -34,9 +36,20 @@ namespace Game.UI
             _buttonReward.onClick.AddListener(reward);
             _buttonSendNotification.onClick.AddListener(sendNotification);
             _buttonBuy.onPurchaseComplete.AddListener(Buy);
+            _buttonEn.onClick.AddListener(ChangeToEnglish);
+            _buttonRu.onClick.AddListener(ChangeToRussian);
             _text.text = "Gold: ";
         }
 
+        private void ChangeToEnglish()
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+        }
+
+        private void ChangeToRussian()
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+        }
         public void ChangeText(int gold)
         {
             _text.text = $"Gold: {gold}";
